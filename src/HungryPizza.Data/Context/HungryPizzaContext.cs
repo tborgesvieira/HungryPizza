@@ -11,6 +11,8 @@ namespace HungryPizza.Data.Context
 
         }
 
+        public DbSet<Pizza> Pizzas { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(HungryPizzaContext).Assembly);
