@@ -24,7 +24,7 @@ namespace HungryPizza.Domain.Services
             if(usuarioConsulta != null)
             {
                 //Está com exception mas o correto é uma notificação de domínio
-                throw new Exception($"Usuário já cadastrado, id {usuario.Id}");                
+                throw new Exception($"Usuário já cadastrado, id {usuarioConsulta.Id}");                
             }
 
             return _usuarioRepository.Adicionar(usuario);

@@ -35,7 +35,7 @@
             Numero = numero;
             Bairro = bairro;
             Cidade = cidade;
-            UF = uf;
+            UF = uf.ToUpper();
         }
     }
 }

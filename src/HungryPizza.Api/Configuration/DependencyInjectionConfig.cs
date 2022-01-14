@@ -1,6 +1,7 @@
 ﻿using HungryPizza.Data;
 using HungryPizza.Data.UoW;
 using HungryPizza.Domain.Interfaces;
+using HungryPizza.Domain.Services;
 
 namespace HungryPizza.Api.Configuration
 {
@@ -10,6 +11,9 @@ namespace HungryPizza.Api.Configuration
         {
             //Mapper
             services.AddAutoMapper(typeof(Program));
+
+            //Services
+            services.AddScoped<IUsuarioService, UsuarioService>();
 
             //Repository
             services.AddScoped<IPizzaRepository, PizzaRepository>();

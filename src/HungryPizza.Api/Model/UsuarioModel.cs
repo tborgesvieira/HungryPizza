@@ -4,7 +4,7 @@ namespace HungryPizza.Api.Model
 {
     public class UsuarioModel
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required(ErrorMessage = "Nome deve ser informado")]
         [MaxLength(100, ErrorMessage = "Nome deve ter no máximo {0} caracteres")]
