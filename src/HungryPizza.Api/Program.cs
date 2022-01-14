@@ -6,6 +6,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddApiConfiguration(builder.Configuration);
 
+builder.Services.RegisterServicesApi();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

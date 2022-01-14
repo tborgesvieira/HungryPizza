@@ -11,6 +11,7 @@ namespace HungryPizza.Data.Context
 
         }
 
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
