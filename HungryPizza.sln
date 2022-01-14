@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HungryPizza.Data.Tests", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryPizza.Api.Tests", "tests\HungryPizza.Api.Tests\HungryPizza.Api.Tests.csproj", "{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryPizza.Domain.Tests", "tests\HungryPizza.Domain.Tests\HungryPizza.Domain.Tests.csproj", "{80202F8F-3AB7-46C4-8A39-D03F68C79126}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80202F8F-3AB7-46C4-8A39-D03F68C79126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80202F8F-3AB7-46C4-8A39-D03F68C79126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80202F8F-3AB7-46C4-8A39-D03F68C79126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80202F8F-3AB7-46C4-8A39-D03F68C79126}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{BEE72A48-4BCA-47B6-89D0-E13E15F1FF84} = {D1E72628-CF75-47B8-9C49-9B0726F26952}
 		{37779D69-D77F-4328-A38D-398374ACABA4} = {D1E72628-CF75-47B8-9C49-9B0726F26952}
 		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469} = {92A06BDB-DAD2-45EF-8CCB-99EC12B8887F}
+		{80202F8F-3AB7-46C4-8A39-D03F68C79126} = {C1DE667E-D118-400B-A6DF-B320F3B9CBFB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5A32DDC-A3DD-42B0-A6AB-DF1FF7228DA5}

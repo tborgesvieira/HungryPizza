@@ -1,6 +1,8 @@
 ﻿using HungryPizza.Data.Context;
 using HungryPizza.Domain;
 using HungryPizza.Domain.Interfaces;
+using HungryPizza.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace HungryPizza.Data
 {
@@ -29,6 +31,11 @@ namespace HungryPizza.Data
         public async Task<Usuario> ObterPorId(Guid id)
         {
             return await _hungryPizzaContext.Usuarios.FindAsync(id);
+        }
+
+        public async Task<Usuario> ObterPorCpf(Cpf cpf)
+        {            
+            return await _hungryPizzaContext.Usuarios.Where(c => c.Cpf.CpfLimpo.Equals(cpf.CpfLimpo)).FirstOrDefaultAsync();
         }
     }
 }

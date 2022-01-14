@@ -1,4 +1,5 @@
 ﻿using HungryPizza.Data;
+using HungryPizza.Data.UoW;
 using HungryPizza.Domain.Interfaces;
 
 namespace HungryPizza.Api.Configuration
@@ -12,6 +13,10 @@ namespace HungryPizza.Api.Configuration
 
             //Repository
             services.AddScoped<IPizzaRepository, PizzaRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+
+            //IUnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
