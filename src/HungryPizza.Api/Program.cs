@@ -1,29 +1,13 @@
-using HungryPizza.Api.Configuration;
+using HungryPizza.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+var startup = new Startup(builder.Configuration);
 
-builder.Services.AddApiConfiguration(builder.Configuration);
-
-builder.Services.RegisterServicesApi();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+startup.ConfigureServices(builder.Services);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+startup.Configure(app, app.Environment);
 
 app.Run();

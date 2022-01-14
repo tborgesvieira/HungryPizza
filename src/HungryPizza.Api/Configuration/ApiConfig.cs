@@ -9,7 +9,7 @@ namespace HungryPizza.Api.Configuration
         {
             var connectionString = configuration.GetConnectionString("HungryPizzaConnection");
 
-            services.AddDbContext<HungryPizzaContext>(option => option.UseSqlServer(connectionString));
+            services.AddDbContext<HungryPizzaContext>(option => option.UseSqlServer(connectionString));            
         }
     }
 }
