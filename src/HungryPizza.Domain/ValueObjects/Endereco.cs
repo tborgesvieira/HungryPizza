@@ -8,7 +8,7 @@
 
         public const int CidadeMaxLength = 100;
 
-        public const int UFMaxLength = 100;
+        public const int UFMaxLength = 2;
 
         public string Logradouro { get; private set; }
         public int? Numero { get; private set; }

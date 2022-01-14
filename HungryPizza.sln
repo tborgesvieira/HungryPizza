@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HungryPizza.Api", "src\Hung
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HungryPizza.Data", "src\HungryPizza.Data\HungryPizza.Data.csproj", "{BEE72A48-4BCA-47B6-89D0-E13E15F1FF84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryPizza.Data.Tests", "tests\HungryPizza.Data.Tests\HungryPizza.Data.Tests.csproj", "{37779D69-D77F-4328-A38D-398374ACABA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HungryPizza.Data.Tests", "tests\HungryPizza.Data.Tests\HungryPizza.Data.Tests.csproj", "{37779D69-D77F-4328-A38D-398374ACABA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HungryPizza.Api.Tests", "tests\HungryPizza.Api.Tests\HungryPizza.Api.Tests.csproj", "{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{37779D69-D77F-4328-A38D-398374ACABA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37779D69-D77F-4328-A38D-398374ACABA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37779D69-D77F-4328-A38D-398374ACABA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{EE5572BF-08E4-47FF-BF27-0A503D257454} = {92A06BDB-DAD2-45EF-8CCB-99EC12B8887F}
 		{BEE72A48-4BCA-47B6-89D0-E13E15F1FF84} = {D1E72628-CF75-47B8-9C49-9B0726F26952}
 		{37779D69-D77F-4328-A38D-398374ACABA4} = {D1E72628-CF75-47B8-9C49-9B0726F26952}
+		{DFFC0EB4-4574-48D7-AC4F-55CA4C9E8469} = {92A06BDB-DAD2-45EF-8CCB-99EC12B8887F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5A32DDC-A3DD-42B0-A6AB-DF1FF7228DA5}
