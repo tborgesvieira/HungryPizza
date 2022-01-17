@@ -20,6 +20,11 @@ namespace HungryPizza.Data
             GC.SuppressFinalize(this);
         }
 
+        public async Task<Pizza> ObterPorId(Guid id)
+        {
+            return await _hungryPizzaContext.Pizzas.FindAsync(id);
+        }
+
         public async Task<IEnumerable<Pizza>> ObterTodos()
         {
             return await _hungryPizzaContext.Pizzas.ToListAsync();

@@ -13,6 +13,7 @@ namespace HungryPizza.Api.Tests.Model
             {
                 var mappingConfig = new MapperConfiguration(mc =>
                 {
+                    mc.AddProfile(new PedidoMapper());
                     mc.AddProfile(new PizzaMapper());
                     mc.AddProfile(new UsuarioMapper());
                 });

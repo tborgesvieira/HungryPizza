@@ -11,25 +11,7 @@ using Xunit;
 namespace HungryPizza.Domain.Tests.Domain
 {
     public class PedidoTests
-    {
-
-        [Fact]
-        public void Pedido_CriarComUmaPizzaSemUsuario_ValidoDuasPizzas()
-        {
-            //Arrange
-            var pizza = new Pizza("Sabor de Teste", 50);
-
-            //Act
-            var pedido = new Pedido("teste", null, "teste", "teste", "go");
-
-            pedido.AdicionarItem(pizza, null);
-
-            pedido.IsValid();
-
-            //Assert
-            Assert.Equal(50, pedido.ValorPedido);
-            Assert.Equal(1, pedido.Itens.Count);
-        }
+    {        
 
         [Fact]
         public void Pedido_CriarComUmaPizzaSemUsuario_Valido()
@@ -37,8 +19,10 @@ namespace HungryPizza.Domain.Tests.Domain
             //Arrange
             var pizza = new Pizza("Sabor de Teste", 50);
 
+            var cpf = new Cpf(new Faker().Person.Cpf());
+
             //Act
-            var pedido = new Pedido("teste", null, "teste", "teste", "go");
+            var pedido = new Pedido(cpf, "teste", null, "teste", "teste", "go");
 
             pedido.AdicionarItem(pizza, null);
 
@@ -50,11 +34,35 @@ namespace HungryPizza.Domain.Tests.Domain
         }
 
         [Fact]
+        public void Pedido_CriarComUmaPizzaSemUsuario_ValidoDuasPizzas()
+        {
+            //Arrange
+            var pizza1 = new Pizza("Sabor de Teste", 50);
+
+            var pizza2 = new Pizza("Sabor de Teste", 60);
+
+            var cpf = new Cpf(new Faker().Person.Cpf());
+
+            //Act
+            var pedido = new Pedido(cpf, "teste", null, "teste", "teste", "go");
+
+            pedido.AdicionarItem(pizza1, pizza2);
+
+            pedido.IsValid();
+
+            //Assert
+            Assert.Equal(55, pedido.ValorPedido);
+            Assert.Equal(1, pedido.Itens.Count);
+        }
+
+        [Fact]
         public void Pedido_CriarComUmaPizzaSemUsuario_InvalidoPedidoSemItem()
         {
             //Arrange
+            var cpf = new Cpf(new Faker().Person.Cpf());
+
             //Act
-            var pedido = new Pedido("teste", null, "teste", "teste", "go");            
+            var pedido = new Pedido(cpf, "teste", null, "teste", "teste", "go");            
 
             var exception = Assert.Throws<Exception>(() => pedido.IsValid());
 
@@ -69,8 +77,11 @@ namespace HungryPizza.Domain.Tests.Domain
             var pizzas = new Faker<Pizza>()
                             .CustomInstantiator(f => new Pizza(f.Random.String(10), f.Random.Double(40, 60)))
                             .Generate(11);
+
+            var cpf = new Cpf(new Faker().Person.Cpf());
+
             //Act
-            var pedido = new Pedido("teste", null, "teste", "teste", "go");
+            var pedido = new Pedido(cpf, "teste", null, "teste", "teste", "go");
 
             pizzas.ForEach(pi => pedido.AdicionarItem(pi, null));
 
@@ -106,6 +117,34 @@ namespace HungryPizza.Domain.Tests.Domain
             Assert.Equal(50, pedido.ValorPedido);
             Assert.Equal(1, pedido.Itens.Count);
             Assert.NotNull(pedido.EnderecoEntrega);
+        }
+
+        [Fact]
+        public void Pedido_CriarComUmaPizzaComUsuario_ValidoDuasPizzas()
+        {
+            //Arrange
+            var pizza1 = new Pizza("Sabor de Teste", 50);
+            var pizza2 = new Pizza("Sabor de Teste", 60);
+
+            var usuario = new Faker<Usuario>()
+                            .CustomInstantiator(f => new Usuario(f.Person.FullName,
+                                                                f.Person.Cpf(),
+                                                                "Teste logradouro",
+                                                                11,
+                                                                "tete bairro",
+                                                                "teste cidade",
+                                                                "go")).Generate();
+
+            //Act
+            var pedido = new Pedido(usuario);
+
+            pedido.AdicionarItem(pizza1, pizza2);
+
+            pedido.IsValid();
+
+            //Assert
+            Assert.Equal(55, pedido.ValorPedido);
+            Assert.Equal(1, pedido.Itens.Count);
         }
     }
 }

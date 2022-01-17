@@ -8,6 +8,7 @@ namespace HungryPizza.Domain
 
         public Guid Id { get; private set; }
         public Usuario Usuario { get; private set; }
+        public Cpf Cpf { get; set; }
         public double ValorPedido { get; private set; }
         public Endereco EnderecoEntrega { get; set; }
         public ICollection<PedidoItem> Itens { get; private set; }
@@ -24,33 +25,40 @@ namespace HungryPizza.Domain
             EnderecoEntrega = usuario.Endereco;
         }
 
-        public Pedido(string logradouro, int? numero, string bairro, string cidade, string uf)
+        public Pedido(Cpf cpf, string logradouro, int? numero, string bairro, string cidade, string uf)
         {
             Id = Guid.NewGuid();
 
             EnderecoEntrega = new Endereco(logradouro, numero, bairro, cidade, uf);
 
             Usuario = null;
+
+            Cpf = cpf;
         }
 
         public void AdicionarItem(Pizza sabor1, Pizza sabor2)
         {
             if (Itens == null) Itens = new List<PedidoItem>();
 
-            var pedidoItem = new PedidoItem(this, sabor1, sabor2);
+            var pedidoItem = new PedidoItem(this, sabor1, sabor2);            
 
-            var valor = sabor1.Valor;
+            ValorPedido += ValorDoPedido(pedidoItem);
 
-            if (sabor2 != null)
+            Itens.Add(pedidoItem);
+        }
+
+        private double ValorDoPedido(PedidoItem pedidoItem)
+        {
+            var valor = pedidoItem.Sabor1.Valor;
+
+            if (pedidoItem.Sabor2 != null)
             {
-                valor += sabor2.Valor;
+                valor += pedidoItem.Sabor2.Valor;
 
                 valor /= 2;
             }
 
-            ValorPedido += valor;
-
-            Itens.Add(pedidoItem);
+            return valor;
         }
 
         //Implementado com exception mas deve ser feito via notificação de domínio
@@ -64,6 +72,18 @@ namespace HungryPizza.Domain
             if (Itens.Count > Quantidade_Maxima_Itens)
             {
                 throw new Exception($"Quantidade máxima de itens deve ser {Quantidade_Maxima_Itens}");
+            }
+
+            var valor = 0.0;
+
+            foreach(var pedidoItem in Itens)
+            {
+                valor += ValorDoPedido(pedidoItem);
+            }
+
+            if (!ValorPedido.Equals(valor))
+            {
+                throw new Exception("Valor do pedido não confere com o dos itens");
             }
         }
     }
