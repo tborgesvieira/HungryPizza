@@ -16,6 +16,7 @@ namespace HungryPizza.Api.Configuration
             services.AddScoped<IUsuarioService, UsuarioService>();
 
             //Repository
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
             services.AddScoped<IPizzaRepository, PizzaRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 

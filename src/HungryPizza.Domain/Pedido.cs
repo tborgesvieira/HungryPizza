@@ -7,7 +7,7 @@ namespace HungryPizza.Domain
         public const int Quantidade_Maxima_Itens = 10;
 
         public Guid Id { get; private set; }
-        public Usuario Usuario { get; private set; }
+        public Usuario? Usuario { get; private set; }
         public Cpf Cpf { get; set; }
         public double ValorPedido { get; private set; }
         public Endereco EnderecoEntrega { get; set; }
@@ -21,6 +21,8 @@ namespace HungryPizza.Domain
         public Pedido(Usuario usuario)
         {
             Id = Guid.NewGuid();
+
+            Cpf = usuario.Cpf;
 
             EnderecoEntrega = usuario.Endereco;
         }

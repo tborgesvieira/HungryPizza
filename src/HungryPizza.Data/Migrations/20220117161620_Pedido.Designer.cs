@@ -4,6 +4,7 @@ using HungryPizza.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HungryPizza.Data.Migrations
 {
     [DbContext(typeof(HungryPizzaContext))]
-    partial class HungryPizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20220117161620_Pedido")]
+    partial class Pedido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,7 +30,7 @@ namespace HungryPizza.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UsuarioId")
+                    b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("ValorPedido")
@@ -91,42 +93,42 @@ namespace HungryPizza.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("38fb63aa-f42c-4b96-af47-ae176779826b"),
+                            Id = new Guid("0361b4a5-b837-4de1-ab6d-80f0ada415ac"),
                             EmFalta = false,
                             Sabor = "3 Queijos",
                             Valor = 50.0
                         },
                         new
                         {
-                            Id = new Guid("42acb2b5-641a-4721-aafd-1580f41432ce"),
+                            Id = new Guid("aae2ed8a-8da8-4c9a-b8fc-cc5174c913b7"),
                             EmFalta = false,
                             Sabor = "Frango com requeijão",
                             Valor = 59.990000000000002
                         },
                         new
                         {
-                            Id = new Guid("4973b9f7-2a5c-47b2-b3f4-9338764e8408"),
+                            Id = new Guid("31138b44-5cb1-4ffb-b3e8-9756335823b2"),
                             EmFalta = false,
                             Sabor = "Mussarela",
                             Valor = 42.5
                         },
                         new
                         {
-                            Id = new Guid("2e93a908-365d-46bc-bee5-963039879bce"),
+                            Id = new Guid("75c32167-4f49-4260-bfb2-528d725638ec"),
                             EmFalta = false,
                             Sabor = "Pepperoni",
                             Valor = 55.0
                         },
                         new
                         {
-                            Id = new Guid("24520238-255a-4099-93a4-c56115dbad61"),
+                            Id = new Guid("05aed5ea-2d09-4830-a1aa-afba64184cee"),
                             EmFalta = false,
                             Sabor = "Portuguesa",
                             Valor = 45.0
                         },
                         new
                         {
-                            Id = new Guid("8ef4d862-5344-4747-9b02-4b73ba8ac666"),
+                            Id = new Guid("2a43e9a2-df98-44a8-8a1c-260e17e477c3"),
                             EmFalta = false,
                             Sabor = "Veggie",
                             Valor = 59.990000000000002
@@ -153,7 +155,9 @@ namespace HungryPizza.Data.Migrations
                 {
                     b.HasOne("HungryPizza.Domain.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.OwnsOne("HungryPizza.Domain.ValueObjects.Cpf", "Cpf", b1 =>
                         {

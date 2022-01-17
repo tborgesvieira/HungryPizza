@@ -5,7 +5,7 @@
         public Guid Id { get; private set; }
         public Pedido Pedido { get; private set; }
         public Pizza Sabor1 { get; private set; }
-        public Pizza Sabor2 { get; private set; }
+        public Pizza? Sabor2 { get; private set; }
 
         protected PedidoItem()
         {

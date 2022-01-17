@@ -4,6 +4,7 @@ using HungryPizza.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HungryPizza.Data.Migrations
 {
     [DbContext(typeof(HungryPizzaContext))]
-    partial class HungryPizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20220117182656_pedidoajuste")]
+    partial class pedidoajuste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
