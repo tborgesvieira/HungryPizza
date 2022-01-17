@@ -52,7 +52,7 @@ namespace HungryPizza.Api.Tests.Integracao
 
             //Assert
             Assert.Equal(System.Net.HttpStatusCode.BadRequest, req.StatusCode);
-            Assert.Equal("{\"type\":\"https://tools.ietf.org/html/rfc7231#section-6.5.1\",\"title\":\"One or more validation errors occurred.\",\"status\":400,\"traceId\":\"0HMENHCRKCD23\",\"errors\":{\"UF\":[\"UF deve ter no máximo 2 caracteres\"],\"Cpf\":[\"Verifique o CPF\"],\"Nome\":[\"Nome deve ter no máximo 100 caracteres\"],\"Bairro\":[\"Bairro deve ter no máximo 100 caracteres\"],\"Cidade\":[\"Cidade deve ter no máximo 100 caracteres\"],\"Logradouro\":[\"Logradouro deve ter no máximo 200 caracteres\"]}}",
+            Assert.Contains("\"errors\":{\"UF\":[\"UF deve ter no máximo 2 caracteres\"],\"Cpf\":[\"Verifique o CPF\"],\"Nome\":[\"Nome deve ter no máximo 100 caracteres\"],\"Bairro\":[\"Bairro deve ter no máximo 100 caracteres\"],\"Cidade\":[\"Cidade deve ter no máximo 100 caracteres\"],\"Logradouro\":[\"Logradouro deve ter no máximo 200 caracteres\"]}}",
                         retorno);
         }
 

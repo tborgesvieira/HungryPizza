@@ -13,7 +13,7 @@
         }
 
         public PedidoItem(Pedido pedido, Pizza sabor1, Pizza sabor2)
-        {
+        {            
             Id = Guid.NewGuid();
 
             Pedido = pedido;
@@ -21,6 +21,19 @@
             Sabor1 = sabor1;
 
             Sabor2 = sabor2;
+        }
+
+        public void IsValid()
+        {
+            if (Sabor1.EmFalta)
+            {
+                throw new Exception("Pizza em falta");
+            }
+
+            if (Sabor2 != null && Sabor2.EmFalta)
+            {
+                throw new Exception("Pizza em falta");
+            }
         }
     }
 }

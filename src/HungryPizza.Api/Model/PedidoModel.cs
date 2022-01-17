@@ -2,6 +2,14 @@
 
 namespace HungryPizza.Api.Model
 {
+    public class PedidoRetornoModel
+    {
+        public Guid Id { get;set; }
+        public double ValorPedido { get; set; }
+        public DateTime DataHora { get; set; }
+        public int QuantidadeItens { get; set; }
+    }
+
     public class PedidoModel
     {
         public Guid? Id { get; set; }

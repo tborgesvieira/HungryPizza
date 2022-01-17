@@ -73,7 +73,12 @@ namespace HungryPizza.Api.Controllers
                     throw new Exception("Falha ao gravar pedido");
                 }
 
-                return Ok(_mapper.Map<PedidoModel>(pedido));
+                if(usuario == null)
+                {
+                    return Ok("Pedido realizado");
+                }
+
+                return Ok(_mapper.Map<PedidoRetornoModel>(pedido));
             }
             catch (Exception err)
             {

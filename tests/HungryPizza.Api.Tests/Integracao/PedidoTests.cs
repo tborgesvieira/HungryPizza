@@ -1,8 +1,5 @@
-﻿using Bogus;
-using Bogus.Extensions.Brazil;
-using HungryPizza.Api.Model;
+﻿using HungryPizza.Api.Model;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -26,22 +23,7 @@ namespace HungryPizza.Api.Tests.Integracao
         public async void FazerPedido()
         {
             //Arrange
-            var faker = new Faker();
-
-            var pizzas = await ObterCardapio();
-
-            var pedidoModel = new PedidoModel()
-            {
-                CPF = faker.Person.Cpf(),
-                Logradouro = "Teste",
-                Bairro = "teste",
-                Cidade = "teste",
-                UF = "GO",
-                Itens = new List<PedidoItemModel>()
-                {
-                    new PedidoItemModel() { Sabor1 = pizzas.First().Id, Sabor2 = pizzas.Last().Id }
-                }
-            };
+            var pedidoModel = await ObterPedidoModel();
 
             var jsonData = JsonConvert.SerializeObject(pedidoModel);
 
@@ -52,11 +34,31 @@ namespace HungryPizza.Api.Tests.Integracao
             //Act
             var req = await httpClient.PutAsync("/api/cadastrar-pedido", httpContent);
 
-            var retorno = JsonConvert.DeserializeObject<Api.Model.PedidoModel>(await req.Content.ReadAsStringAsync());
+            var retorno = await req.Content.ReadAsStringAsync();
 
             //Assert
             Assert.Equal(System.Net.HttpStatusCode.OK, req.StatusCode);
-            Assert.NotNull(retorno);
+            Assert.Equal("Pedido realizado", retorno);
+        }
+
+        private async Task<PedidoModel> ObterPedidoModel()
+        {            
+            var pizzas = await ObterCardapio();
+
+            var pedidoModel = new PedidoModel()
+            {
+                CPF = "736.772.490-82",
+                Logradouro = "Teste",
+                Bairro = "teste",
+                Cidade = "teste",
+                UF = "GO",
+                Itens = new List<PedidoItemModel>()
+                {
+                    new PedidoItemModel() { Sabor1 = pizzas.First().Id, Sabor2 = pizzas.Last().Id }
+                }
+            };
+
+            return pedidoModel;
         }
 
         private async Task<IEnumerable<Api.Model.PizzaModel>> ObterCardapio()

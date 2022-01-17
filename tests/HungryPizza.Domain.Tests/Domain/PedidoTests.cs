@@ -34,6 +34,27 @@ namespace HungryPizza.Domain.Tests.Domain
         }
 
         [Fact]
+        public void Pedido_CriarComUmaPizzaSemUsuario_InvalidoEmFalta()
+        {
+            //Arrange
+            var pizza = new Pizza("Sabor de Teste", 50);
+
+            pizza.GetType().GetProperty("EmFalta").SetValue(pizza, true);
+
+            var cpf = new Cpf(new Faker().Person.Cpf());
+
+            //Act
+            var pedido = new Pedido(cpf, "teste", null, "teste", "teste", "go");
+
+            pedido.AdicionarItem(pizza, null);
+
+            var exception = Assert.Throws<Exception>(()=> pedido.IsValid());
+
+            //Assert
+            Assert.Equal("Pizza em falta", exception.Message);
+        }
+
+        [Fact]
         public void Pedido_CriarComUmaPizzaSemUsuario_ValidoDuasPizzas()
         {
             //Arrange

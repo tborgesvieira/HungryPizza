@@ -9,6 +9,7 @@ namespace HungryPizza.Domain
         public Guid Id { get; private set; }
         public Usuario? Usuario { get; private set; }
         public Cpf Cpf { get; set; }
+        public DateTime DataHora { get; private set; }
         public double ValorPedido { get; private set; }
         public Endereco EnderecoEntrega { get; set; }
         public ICollection<PedidoItem> Itens { get; private set; }
@@ -23,6 +24,8 @@ namespace HungryPizza.Domain
             Id = Guid.NewGuid();
 
             Cpf = usuario.Cpf;
+
+            DataHora = DateTime.Now;
 
             EnderecoEntrega = usuario.Endereco;
         }
@@ -81,6 +84,8 @@ namespace HungryPizza.Domain
             foreach(var pedidoItem in Itens)
             {
                 valor += ValorDoPedido(pedidoItem);
+
+                pedidoItem.IsValid();                
             }
 
             if (!ValorPedido.Equals(valor))

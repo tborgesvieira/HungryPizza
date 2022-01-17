@@ -2,11 +2,6 @@
 using HungryPizza.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HungryPizza.Data.Mapping
 {
@@ -15,6 +10,9 @@ namespace HungryPizza.Data.Mapping
         public void Configure(EntityTypeBuilder<Pedido> builder)
         {
             builder.HasKey(c => c.Id);
+
+            builder.Property(c => c.DataHora)
+                .IsRequired();
 
             builder.OwnsOne(c => c.Cpf, cpf =>
             {

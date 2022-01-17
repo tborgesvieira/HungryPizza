@@ -37,11 +37,11 @@ namespace HungryPizza.Api.Tests.Model
             pedido.AdicionarItem(pizzaFaker, null);
 
             //Act
-            var pedidoModel = _modelFixture.ObterMapper().Map<PedidoModel>(pedido);
+            var pedidoModel = _modelFixture.ObterMapper().Map<PedidoRetornoModel>(pedido);
 
             //Assert
             Assert.NotNull(pedidoModel);
-            Assert.Equal(10, pedidoModel.ValorTotal);
+            Assert.Equal(10, pedidoModel.ValorPedido);
         }
 
         [Fact]
@@ -61,11 +61,11 @@ namespace HungryPizza.Api.Tests.Model
             pedido.AdicionarItem(pizzaFaker1, pizzaFaker2);
 
             //Act
-            var pedidoModel = _modelFixture.ObterMapper().Map<PedidoModel>(pedido);
+            var pedidoModel = _modelFixture.ObterMapper().Map<PedidoRetornoModel>(pedido);
 
             //Assert
             Assert.NotNull(pedidoModel);
-            Assert.Equal(15, pedidoModel.ValorTotal);
+            Assert.Equal(15, pedidoModel.ValorPedido);
         }
     }
 }
