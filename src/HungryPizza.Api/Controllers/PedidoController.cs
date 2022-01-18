@@ -73,12 +73,25 @@ namespace HungryPizza.Api.Controllers
                     throw new Exception("Falha ao gravar pedido");
                 }
 
-                if(usuario == null)
+                if (usuario == null)
                 {
                     return Ok("Pedido realizado");
                 }
 
                 return Ok(_mapper.Map<PedidoRetornoModel>(pedido));
+            }
+            catch (Exception err)
+            {
+                return BadRequest(err.Message);
+            }
+        }
+
+        [HttpGet("obter-pedidos-do-usuario")]
+        public async Task<IActionResult> ObterPedidos(Guid usuarioId, int offset = 1, int limit = 10)
+        {
+            try
+            {
+                return Ok(_mapper.Map<IEnumerable<PedidoRetornoModel>>(await _pedidoRepository.ObterPedidosUsuarioPaginado(usuarioId, offset, limit)));
             }
             catch (Exception err)
             {

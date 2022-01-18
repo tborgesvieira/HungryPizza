@@ -22,6 +22,8 @@ namespace HungryPizza.Data.Tests
 
         private readonly IPizzaRepository _pizzaRepository;
 
+        private readonly IUsuarioRepository _usuarioRepository;
+
         private readonly IUnitOfWork _unitOfWork;
 
         public PedidoRepositoryTests(HungryPizzaContextTest hungryPizzaContextTest)
@@ -33,6 +35,8 @@ namespace HungryPizza.Data.Tests
             _pizzaRepository = new PizzaRepository(_hungryPizzaContextTest.ObterContext());
 
             _pedidoRepository = new PedidoRepository(_hungryPizzaContextTest.ObterContext());
+
+            _usuarioRepository = new UsuarioRepository(_hungryPizzaContextTest.ObterContext());
         }
 
 
@@ -57,6 +61,46 @@ namespace HungryPizza.Data.Tests
             Assert.NotNull(pedido);
 
             Assert.True(save);
+        }
+
+
+        [Fact]
+        public async void PedidoRepository_BuscarPedidoUsuario_Valido()
+        {
+            //Arrange
+            var usuarioFaker = new Faker<Usuario>("pt_BR")
+                                .CustomInstantiator(f => new Usuario(f.Person.FullName,
+                                                                     f.Person.Cpf(),
+                                                                     "logradorou do usuario",
+                                                                     10,
+                                                                     "bairro usuario",
+                                                                     "Brasília",
+                                                                     "DF")).Generate();
+
+            var usuario = _usuarioRepository.Adicionar(usuarioFaker);
+
+            _unitOfWork.Commit();
+
+            usuario = await _usuarioRepository.ObterPorId(usuario.Id);
+
+            var pizzas = await _pizzaRepository.ObterTodos();            
+
+            for (int i = 0; i < 100; i++)
+            {
+                var pedidoAdd = new Pedido(usuarioFaker);                
+
+                pedidoAdd.AdicionarItem(pizzas.First(), pizzas.Last());
+
+                _pedidoRepository.Adicionar(pedidoAdd);                
+            }
+
+            _unitOfWork.Commit();
+
+            //Act
+            var pedidos = await _pedidoRepository.ObterPedidosUsuarioPaginado(usuarioFaker.Id, 1, 10);
+
+            //Assert
+            Assert.Equal(10, pedidos.Count());
         }
     }
 }

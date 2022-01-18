@@ -25,6 +25,8 @@ namespace HungryPizza.Domain
 
             Cpf = usuario.Cpf;
 
+            Usuario = usuario;
+
             DataHora = DateTime.Now;
 
             EnderecoEntrega = usuario.Endereco;

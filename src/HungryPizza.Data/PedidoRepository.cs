@@ -1,6 +1,7 @@
 ﻿using HungryPizza.Data.Context;
 using HungryPizza.Domain;
 using HungryPizza.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace HungryPizza.Data
 {
@@ -24,6 +25,19 @@ namespace HungryPizza.Data
             _hungryPizzaContext.Pedidos.Add(pedido);
 
             return pedido;
-        }        
+        }
+
+        public async Task<IEnumerable<Pedido>> ObterPedidosUsuarioPaginado(Guid usuarioId, int offset, int limit)
+        {
+            var list = await _hungryPizzaContext.Pedidos
+                                .Where(c => c.Usuario.Id.Equals(usuarioId))
+                                .AsNoTracking()
+                                .OrderByDescending(c => c.DataHora)
+                                .Skip(offset)
+                                .Take(limit)
+                                .ToListAsync();
+
+            return list;
+        }
     }
 }
